@@ -24,22 +24,14 @@
 <body>
 <!-- ============================================================
   PAGE LOADER — REPLACE the existing #wd-loader block in index.html
-  (right after <body>) with this one. Fixes: line was drawing from
-  both ends because stroke-dasharray didn't match the real path
-  length. Also sped up the loop.
+  (right after <body>) with this one. This uses your ACTUAL
+  favicon.ico image directly (no redrawn shape), animated with a
+  bottom-to-top "growth reveal" clip, then drops + resets, looping.
 ============================================================ -->
 <div id="wd-loader">
-  <svg id="wd-loader-icon" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="wd-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#ffe771"/>
-        <stop offset="100%" stop-color="#ab8737"/>
-      </linearGradient>
-    </defs>
-    <polyline id="wd-loader-line"
-      points="0,41 32,94 64,4 86,94 125,30 141,13" />
-    <circle id="wd-loader-dot" cx="148" cy="13" r="12" />
-  </svg>
+  <div id="wd-loader-wrap">
+    <img id="wd-loader-icon" src="favicon.ico" alt="" width="120" height="120">
+  </div>
 </div>
 
 <style>
@@ -58,41 +50,26 @@
     visibility:hidden;
     pointer-events:none;
   }
-  #wd-loader-icon{
-    width:150px;
-    height:auto;
-    overflow:visible;
+  #wd-loader-wrap{
+    width:120px;
+    height:120px;
     animation:wd-drop 2s cubic-bezier(.55,0,.1,1) infinite;
   }
-  #wd-loader-line{
-    fill:none;
-    stroke:url(#wd-gold);
-    stroke-width:9;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    /* exact path length (~348.4) + small buffer, so the dash pattern
-       never wraps and produces a phantom segment from the other end */
-    stroke-dasharray:350;
-    stroke-dashoffset:350;
-    animation:wd-draw 2s cubic-bezier(.4,0,.2,1) infinite;
+  #wd-loader-icon{
+    width:120px;
+    height:120px;
+    object-fit:contain;
+    display:block;
+    /* growth reveal: clipped fully at the bottom, animates open
+       upward like a bar/chart filling in */
+    clip-path:inset(100% 0 0 0);
+    animation:wd-grow 2s cubic-bezier(.4,0,.2,1) infinite;
   }
-  #wd-loader-dot{
-    fill:url(#wd-gold);
-    opacity:0;
-    transform-origin:148px 13px;
-    animation:wd-dot-in 2s ease infinite;
-  }
-  @keyframes wd-draw{
-    0%{ stroke-dashoffset:350; }
-    58%{ stroke-dashoffset:0; }
-    74%{ stroke-dashoffset:0; }
-    100%{ stroke-dashoffset:0; }
-  }
-  @keyframes wd-dot-in{
-    0%, 52%{ opacity:0; transform:scale(.3); }
-    60%{ opacity:1; transform:scale(1.15); }
-    68%, 74%{ opacity:1; transform:scale(1); }
-    85%, 100%{ opacity:0; transform:scale(.3); }
+  @keyframes wd-grow{
+    0%{ clip-path:inset(100% 0 0 0); }
+    58%{ clip-path:inset(0% 0 0 0); }
+    74%{ clip-path:inset(0% 0 0 0); }
+    100%{ clip-path:inset(0% 0 0 0); }
   }
   @keyframes wd-drop{
     0%, 62%{ transform:translateY(0); opacity:1; }
@@ -102,9 +79,8 @@
     100%{ transform:translateY(0); opacity:1; }
   }
   @media (prefers-reduced-motion: reduce){
-    #wd-loader-icon, #wd-loader-line, #wd-loader-dot{ animation:none !important; }
-    #wd-loader-line{ stroke-dashoffset:0; }
-    #wd-loader-dot{ opacity:1; transform:scale(1); }
+    #wd-loader-wrap, #wd-loader-icon{ animation:none !important; }
+    #wd-loader-icon{ clip-path:none; }
   }
 </style>
 
