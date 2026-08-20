@@ -24,9 +24,10 @@
 <body>
 <!-- ============================================================
   PAGE LOADER — REPLACE the existing #wd-loader block in index.html
-  (right after <body>) with this one. This uses your ACTUAL
-  favicon.ico image directly (no redrawn shape), animated with a
-  bottom-to-top "growth reveal" clip, then drops + resets, looping.
+  (right after <body>) with this one. Uses your exact favicon.ico
+  image, revealed progressively from bottom-left to top-right
+  (the direction your trend line grows) instead of the whole icon
+  fading/clipping in at once.
 ============================================================ -->
 <div id="wd-loader">
   <div id="wd-loader-wrap">
@@ -60,16 +61,17 @@
     height:120px;
     object-fit:contain;
     display:block;
-    /* growth reveal: clipped fully at the bottom, animates open
-       upward like a bar/chart filling in */
-    clip-path:inset(100% 0 0 0);
+    /* growth sweep: reveal expands from the bottom-left corner
+       (where the trend line starts) out to the top-right corner
+       (where it ends), tracing the same direction as the chart */
+    clip-path:polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
     animation:wd-grow 2s cubic-bezier(.4,0,.2,1) infinite;
   }
   @keyframes wd-grow{
-    0%{ clip-path:inset(100% 0 0 0); }
-    58%{ clip-path:inset(0% 0 0 0); }
-    74%{ clip-path:inset(0% 0 0 0); }
-    100%{ clip-path:inset(0% 0 0 0); }
+    0%{ clip-path:polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%); }
+    58%{ clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
+    74%{ clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
+    100%{ clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
   }
   @keyframes wd-drop{
     0%, 62%{ transform:translateY(0); opacity:1; }
