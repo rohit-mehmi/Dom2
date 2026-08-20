@@ -22,6 +22,91 @@
 </head>
 
 <body>
+  <!-- ============================================================
+  PAGE LOADER — paste this block right after the opening <body> tag
+  of your index.html (before any other content).
+============================================================ -->
+<div id="wd-loader">
+  <svg id="wd-loader-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <polyline id="wd-loader-line" points="10,80 32,55 50,65 72,30 90,15" />
+    <polygon id="wd-loader-arrow" points="90,15 76,15 90,29" />
+  </svg>
+</div>
+
+<style>
+  #wd-loader{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0a0a0a;
+    transition:opacity .4s ease, visibility .4s ease;
+  }
+  #wd-loader.wd-loader-hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  #wd-loader-icon{
+    width:84px;
+    height:84px;
+    animation:wd-drop 2.6s cubic-bezier(.55,0,.1,1) infinite;
+  }
+  #wd-loader-line{
+    fill:none;
+    stroke:#7CFF6B;
+    stroke-width:6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:140;
+    stroke-dashoffset:140;
+    animation:wd-draw 2.6s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  #wd-loader-arrow{
+    fill:#7CFF6B;
+    opacity:0;
+    animation:wd-arrow-in 2.6s ease infinite;
+  }
+  @keyframes wd-draw{
+    0%{ stroke-dashoffset:140; }
+    65%{ stroke-dashoffset:0; }
+    77%{ stroke-dashoffset:0; }
+    100%{ stroke-dashoffset:0; }
+  }
+  @keyframes wd-arrow-in{
+    0%, 60%{ opacity:0; }
+    68%, 77%{ opacity:1; }
+    85%, 100%{ opacity:0; }
+  }
+  @keyframes wd-drop{
+    0%, 65%{ transform:translateY(0); opacity:1; }
+    77%{ transform:translateY(0); opacity:1; }
+    88%{ transform:translateY(40px); opacity:0; }
+    89%{ transform:translateY(-30px); opacity:0; }
+    100%{ transform:translateY(0); opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #wd-loader-icon, #wd-loader-line, #wd-loader-arrow{ animation:none !important; }
+    #wd-loader-line{ stroke-dashoffset:0; }
+    #wd-loader-arrow{ opacity:1; }
+  }
+</style>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('wd-loader');
+    if (loader) {
+      setTimeout(function () {
+        loader.classList.add('wd-loader-hide');
+      }, 300);
+    }
+  });
+</script>
+<!-- ============================================================
+  END PAGE LOADER
+============================================================ -->
   <div class="min-h-screen bg-background">
     <header id="site-header"
       class="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-700 ease-expo border-b border-border/70 bg-[rgba(10,10,12,0.8)] backdrop-blur-xl">
