@@ -22,14 +22,23 @@
 </head>
 
 <body>
-  <!-- ============================================================
-  PAGE LOADER — paste this block right after the opening <body> tag
-  of your index.html (before any other content).
+<!-- ============================================================
+  PAGE LOADER — REPLACE the old #wd-loader block (the one right after
+  <body>) in index.html with this one. This version uses your actual
+  favicon shape (gold W-zigzag growth mark + dot) instead of the
+  placeholder icon from before.
 ============================================================ -->
 <div id="wd-loader">
-  <svg id="wd-loader-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <polyline id="wd-loader-line" points="10,80 32,55 50,65 72,30 90,15" />
-    <polygon id="wd-loader-arrow" points="90,15 76,15 90,29" />
+  <svg id="wd-loader-icon" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wd-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffe771"/>
+        <stop offset="100%" stop-color="#ab8737"/>
+      </linearGradient>
+    </defs>
+    <polyline id="wd-loader-line"
+      points="0,41 32,94 64,4 86,94 125,30 141,13" />
+    <circle id="wd-loader-dot" cx="148" cy="13" r="12" />
   </svg>
 </div>
 
@@ -50,35 +59,38 @@
     pointer-events:none;
   }
   #wd-loader-icon{
-    width:84px;
-    height:84px;
+    width:150px;
+    height:auto;
+    overflow:visible;
     animation:wd-drop 2.6s cubic-bezier(.55,0,.1,1) infinite;
   }
   #wd-loader-line{
     fill:none;
-    stroke:#7CFF6B;
-    stroke-width:6;
+    stroke:url(#wd-gold);
+    stroke-width:9;
     stroke-linecap:round;
     stroke-linejoin:round;
-    stroke-dasharray:140;
-    stroke-dashoffset:140;
+    stroke-dasharray:330;
+    stroke-dashoffset:330;
     animation:wd-draw 2.6s cubic-bezier(.65,0,.35,1) infinite;
   }
-  #wd-loader-arrow{
-    fill:#7CFF6B;
+  #wd-loader-dot{
+    fill:url(#wd-gold);
     opacity:0;
-    animation:wd-arrow-in 2.6s ease infinite;
+    transform-origin:148px 13px;
+    animation:wd-dot-in 2.6s ease infinite;
   }
   @keyframes wd-draw{
-    0%{ stroke-dashoffset:140; }
+    0%{ stroke-dashoffset:330; }
     65%{ stroke-dashoffset:0; }
     77%{ stroke-dashoffset:0; }
     100%{ stroke-dashoffset:0; }
   }
-  @keyframes wd-arrow-in{
-    0%, 60%{ opacity:0; }
-    68%, 77%{ opacity:1; }
-    85%, 100%{ opacity:0; }
+  @keyframes wd-dot-in{
+    0%, 60%{ opacity:0; transform:scale(.3); }
+    68%{ opacity:1; transform:scale(1.15); }
+    74%, 77%{ opacity:1; transform:scale(1); }
+    85%, 100%{ opacity:0; transform:scale(.3); }
   }
   @keyframes wd-drop{
     0%, 65%{ transform:translateY(0); opacity:1; }
@@ -88,9 +100,9 @@
     100%{ transform:translateY(0); opacity:1; }
   }
   @media (prefers-reduced-motion: reduce){
-    #wd-loader-icon, #wd-loader-line, #wd-loader-arrow{ animation:none !important; }
+    #wd-loader-icon, #wd-loader-line, #wd-loader-dot{ animation:none !important; }
     #wd-loader-line{ stroke-dashoffset:0; }
-    #wd-loader-arrow{ opacity:1; }
+    #wd-loader-dot{ opacity:1; transform:scale(1); }
   }
 </style>
 
@@ -107,6 +119,7 @@
 <!-- ============================================================
   END PAGE LOADER
 ============================================================ -->
+  
   <div class="min-h-screen bg-background">
     <header id="site-header"
       class="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-700 ease-expo border-b border-border/70 bg-[rgba(10,10,12,0.8)] backdrop-blur-xl">
