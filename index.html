@@ -23,10 +23,10 @@
 
 <body>
 <!-- ============================================================
-  PAGE LOADER — REPLACE the old #wd-loader block (the one right after
-  <body>) in index.html with this one. This version uses your actual
-  favicon shape (gold W-zigzag growth mark + dot) instead of the
-  placeholder icon from before.
+  PAGE LOADER — REPLACE the existing #wd-loader block in index.html
+  (right after <body>) with this one. Fixes: line was drawing from
+  both ends because stroke-dasharray didn't match the real path
+  length. Also sped up the loop.
 ============================================================ -->
 <div id="wd-loader">
   <svg id="wd-loader-icon" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@
     width:150px;
     height:auto;
     overflow:visible;
-    animation:wd-drop 2.6s cubic-bezier(.55,0,.1,1) infinite;
+    animation:wd-drop 2s cubic-bezier(.55,0,.1,1) infinite;
   }
   #wd-loader-line{
     fill:none;
@@ -70,33 +70,35 @@
     stroke-width:9;
     stroke-linecap:round;
     stroke-linejoin:round;
-    stroke-dasharray:330;
-    stroke-dashoffset:330;
-    animation:wd-draw 2.6s cubic-bezier(.65,0,.35,1) infinite;
+    /* exact path length (~348.4) + small buffer, so the dash pattern
+       never wraps and produces a phantom segment from the other end */
+    stroke-dasharray:350;
+    stroke-dashoffset:350;
+    animation:wd-draw 2s cubic-bezier(.4,0,.2,1) infinite;
   }
   #wd-loader-dot{
     fill:url(#wd-gold);
     opacity:0;
     transform-origin:148px 13px;
-    animation:wd-dot-in 2.6s ease infinite;
+    animation:wd-dot-in 2s ease infinite;
   }
   @keyframes wd-draw{
-    0%{ stroke-dashoffset:330; }
-    65%{ stroke-dashoffset:0; }
-    77%{ stroke-dashoffset:0; }
+    0%{ stroke-dashoffset:350; }
+    58%{ stroke-dashoffset:0; }
+    74%{ stroke-dashoffset:0; }
     100%{ stroke-dashoffset:0; }
   }
   @keyframes wd-dot-in{
-    0%, 60%{ opacity:0; transform:scale(.3); }
-    68%{ opacity:1; transform:scale(1.15); }
-    74%, 77%{ opacity:1; transform:scale(1); }
+    0%, 52%{ opacity:0; transform:scale(.3); }
+    60%{ opacity:1; transform:scale(1.15); }
+    68%, 74%{ opacity:1; transform:scale(1); }
     85%, 100%{ opacity:0; transform:scale(.3); }
   }
   @keyframes wd-drop{
-    0%, 65%{ transform:translateY(0); opacity:1; }
-    77%{ transform:translateY(0); opacity:1; }
-    88%{ transform:translateY(40px); opacity:0; }
-    89%{ transform:translateY(-30px); opacity:0; }
+    0%, 62%{ transform:translateY(0); opacity:1; }
+    74%{ transform:translateY(0); opacity:1; }
+    87%{ transform:translateY(40px); opacity:0; }
+    88%{ transform:translateY(-30px); opacity:0; }
     100%{ transform:translateY(0); opacity:1; }
   }
   @media (prefers-reduced-motion: reduce){
