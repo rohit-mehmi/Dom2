@@ -291,7 +291,7 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
-          section.style.backgroundColor = "#141417";
+          section.style.backgroundColor = "var(--surface)";
           inner.classList.add("rise-in");
           io.disconnect();
         });
@@ -299,5 +299,42 @@
       { threshold: 0.25, rootMargin: "0px 0px -8% 0px" }
     );
     io.observe(section);
+  })();
+
+  /* ---------------------------------------------------------------------
+   * 10. Light / dark theme toggle (floating button, bottom-right)
+   * ------------------------------------------------------------------- */
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("theme-toggle");
+    var logos = document.querySelectorAll('img[alt="Web Dominators"]');
+
+    function applyTheme(theme) {
+      if (theme === "light") {
+        root.setAttribute("data-theme", "light");
+      } else {
+        root.removeAttribute("data-theme");
+      }
+      logos.forEach(function (img) {
+        img.src = theme === "light" ? "logo-light.png" : "logo.png";
+      });
+    }
+
+    var stored = null;
+    try {
+      stored = localStorage.getItem("wd-theme");
+    } catch (e) {}
+    applyTheme(stored === "light" ? "light" : "dark");
+
+    if (btn) {
+      btn.addEventListener("click", function () {
+        var isLight = root.getAttribute("data-theme") === "light";
+        var next = isLight ? "dark" : "light";
+        applyTheme(next);
+        try {
+          localStorage.setItem("wd-theme", next);
+        } catch (e) {}
+      });
+    }
   })();
 })();
