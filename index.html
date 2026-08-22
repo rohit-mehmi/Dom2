@@ -4,6 +4,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem("wd-theme");
+        if (t === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600&amp;display=swap">
@@ -22,84 +32,6 @@
 </head>
 
 <body>
-<!-- ============================================================
-  PAGE LOADER — REPLACE the existing #wd-loader block in index.html
-  (right after <body>) with this one. Uses your exact favicon.ico
-  image, revealed progressively from bottom-left to top-right
-  (the direction your trend line grows) instead of the whole icon
-  fading/clipping in at once.
-============================================================ -->
-<div id="wd-loader">
-  <div id="wd-loader-wrap">
-    <img id="wd-loader-icon" src="favicon.ico" alt="" width="120" height="120">
-  </div>
-</div>
-
-<style>
-  #wd-loader{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#0a0a0a;
-    transition:opacity .4s ease, visibility .4s ease;
-  }
-  #wd-loader.wd-loader-hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-  }
-  #wd-loader-wrap{
-    width:120px;
-    height:120px;
-    animation:wd-drop 2s cubic-bezier(.55,0,.1,1) infinite;
-  }
-  #wd-loader-icon{
-    width:120px;
-    height:120px;
-    object-fit:contain;
-    display:block;
-    /* growth sweep: reveal expands from the bottom-left corner
-       (where the trend line starts) out to the top-right corner
-       (where it ends), tracing the same direction as the chart */
-    clip-path:polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
-    animation:wd-grow 2s cubic-bezier(.4,0,.2,1) infinite;
-  }
-  @keyframes wd-grow{
-    0%{ clip-path:polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%); }
-    58%{ clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
-    74%{ clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
-    100%{ clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
-  }
-  @keyframes wd-drop{
-    0%, 62%{ transform:translateY(0); opacity:1; }
-    74%{ transform:translateY(0); opacity:1; }
-    87%{ transform:translateY(40px); opacity:0; }
-    88%{ transform:translateY(-30px); opacity:0; }
-    100%{ transform:translateY(0); opacity:1; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    #wd-loader-wrap, #wd-loader-icon{ animation:none !important; }
-    #wd-loader-icon{ clip-path:none; }
-  }
-</style>
-
-<script>
-  window.addEventListener('load', function () {
-    var loader = document.getElementById('wd-loader');
-    if (loader) {
-      setTimeout(function () {
-        loader.classList.add('wd-loader-hide');
-      }, 300);
-    }
-  });
-</script>
-<!-- ============================================================
-  END PAGE LOADER
-============================================================ -->
-  
   <div class="min-h-screen bg-background">
     <header id="site-header"
       class="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-700 ease-expo border-b border-border/70 bg-[rgba(10,10,12,0.8)] backdrop-blur-xl">
@@ -244,24 +176,25 @@
                 </div>
               </div>
             </div>
-            <div class="relative hidden lg:block"><svg viewBox="0 0 460 380" class="w-full" role="img" aria-label="Growth curve">
-  <line x1="20" x2="440" y1="70" y2="70" stroke="var(--border)" stroke-width="0.6"></line>
-  <line x1="20" x2="440" y1="132" y2="132" stroke="var(--border)" stroke-width="0.6"></line>
-  <line x1="20" x2="440" y1="194" y2="194" stroke="var(--border)" stroke-width="0.6"></line>
-  <line x1="20" x2="440" y1="256" y2="256" stroke="var(--border)" stroke-width="0.6"></line>
-  <line x1="20" x2="440" y1="318" y2="318" stroke="var(--border)" stroke-width="0.6"></line>
-  <path id="hero-draw-path" d="M31 237 L93 306 L179 185 L240 305 L365 115 L410 58" fill="none"
-    stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
-    class="draw-line" style="--len: 680px; transition-duration: 2.8s;"></path>
-  <path d="M20 348 C 120 344, 170 312, 250 296 S 350 268, 440 214" fill="none" stroke="var(--muted-text)"
-    stroke-width="1" stroke-dasharray="4 6" opacity="0.55"></path>
-  <circle cx="179" cy="185" r="4" fill="var(--accent)"
-    style="animation:dotPulse 3.2s var(--ease-expo) 0s infinite"></circle>
-  <circle cx="365" cy="115" r="4" fill="var(--accent)"
-    style="animation:dotPulse 3.9s var(--ease-expo) 0.4s infinite"></circle>
-  <circle cx="410" cy="58" r="10" fill="var(--accent)"
-    style="animation:dotPulse 4.6s var(--ease-expo) 0.8s infinite"></circle>
-</svg></div>
+            <div class="relative hidden lg:block"><svg viewBox="0 0 460 380" class="w-full" role="img"
+                aria-label="Growth curve">
+                <line x1="20" x2="440" y1="70" y2="70" stroke="var(--border)" stroke-width="0.6"></line>
+                <line x1="20" x2="440" y1="132" y2="132" stroke="var(--border)" stroke-width="0.6"></line>
+                <line x1="20" x2="440" y1="194" y2="194" stroke="var(--border)" stroke-width="0.6"></line>
+                <line x1="20" x2="440" y1="256" y2="256" stroke="var(--border)" stroke-width="0.6"></line>
+                <line x1="20" x2="440" y1="318" y2="318" stroke="var(--border)" stroke-width="0.6"></line>
+                <path id="hero-draw-path" d="M31 237.0 L93 294.8 L179 162.4 L240 263.4 L378 68.5 L401 34.4" fill="none"
+                  stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+                  class="draw-line" style="--len: 622px; transition-duration: 2.9s;"></path>
+                <path d="M20 348 C 120 344, 170 312, 250 296 S 350 268, 440 214" fill="none" stroke="var(--muted-text)"
+                  stroke-width="1" stroke-dasharray="4 6" opacity="0.55"></path>
+                <circle cx="179" cy="162.4" r="4" fill="var(--accent)"
+                  style="animation:dotPulse 3.2s var(--ease-expo) 0s infinite"></circle>
+                <circle cx="378" cy="68.5" r="4" fill="var(--accent)"
+                  style="animation:dotPulse 3.9000000000000004s var(--ease-expo) 0.4s infinite"></circle>
+                <circle cx="401" cy="34.4" r="9" fill="var(--accent)"
+                  style="animation:dotPulse 4.6s var(--ease-expo) 0.8s infinite"></circle>
+              </svg></div>
           </div>
         </div>
         <div aria-hidden="true"
@@ -720,7 +653,7 @@
           class="pointer-events-none absolute bottom-0 left-1/2 h-28 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-accent/50 to-accent/80"></span>
       </section>
       <section id="contact" class="section-y transition-colors duration-1000 ease-expo"
-        style="background-color: #0A0A0C;">
+        style="background-color: var(--background);">
         <div class="shell">
           <div id="finalcta-inner" class="shell-inner rise text-center">
             <h2
@@ -808,7 +741,17 @@
         </div>
       </div>
     </footer>
-  </div>
+  </div><button id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark mode" type="button"><svg
+      class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4.2"></circle>
+      <path
+        d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7">
+      </path>
+    </svg><svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"></path>
+    </svg></button>
   <script src="script.js"></script>
 </body>
 
