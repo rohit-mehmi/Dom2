@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem("wd-theme");
+        if (t === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+  <title>SEO Services | Search Engine Optimization Agency — Web Dominators</title>
+  <meta name="author" content="Web Dominators">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="description"
+    content="SEO services built around revenue, not vanity rankings — technical, on-page, off-page, content and AI search, run as one system by Web Dominators.">
+  <meta property="og:title" content="SEO Services | Search Engine Optimization Agency — Web Dominators">
+  <meta property="og:description"
+    content="SEO services built around revenue, not vanity rankings — technical, on-page, off-page, content and AI search, run as one system by Web Dominators.">
+  <link rel="canonical" href="https://webdominators.com/seo-services.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Structured data: Service + FAQPage + Breadcrumb, for AI Overview / rich-result eligibility -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Search Engine Optimization",
+    "name": "SEO Services",
+    "description": "Technical, on-page, off-page, content and AI search optimization delivered as one system to grow organic traffic and revenue.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Web Dominators",
+      "url": "https://webdominators.com",
+      "email": "hello@webdominators.com"
+    },
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "SEO Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical SEO" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "On-Page SEO" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Off-Page SEO & Link Building" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Strategy & Creation" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Search Optimization (GEO/AEO)" } }
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webdominators.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://webdominators.com/#services" },
+      { "@type": "ListItem", "position": 3, "name": "SEO Services", "item": "https://webdominators.com/seo-services.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are SEO services?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SEO services are the technical, on-page, off-page, content and AI-search work an agency does to improve a website's visibility in search results and generative AI answers, aimed at driving qualified organic traffic rather than just higher rankings." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do SEO services cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It depends on your site's size, competition and goals — pricing is usually a monthly retainer, a one-time audit, or a scoped project. We quote after an audit, not before one." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does SEO take to show results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Technical and on-page fixes can move rankings within 4-8 weeks. Meaningful, compounding organic traffic typically builds over 4-7 months, depending on competition." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between SEO and PPC?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SEO earns organic rankings over time and compounds; PPC buys immediate visibility that stops the moment you stop paying. Most businesses benefit from both, run together rather than as a choice between them." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you guarantee rankings?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No - and any agency that does is either overpromising or cutting corners with tactics that risk a penalty. We commit to a transparent process and honest reporting instead." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's included in an SEO audit?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A technical crawl, keyword and AI-search visibility gap analysis, competitor benchmark and a prioritized plan - yours to keep whether or not you continue working with us." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer local SEO as well as national SEO?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Local SEO (Google Business Profile, citations, location pages) and national/enterprise SEO are both part of our service range, often combined for businesses with both a storefront and a national online presence." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is AI search optimization (GEO) different from regular SEO?",
+        "acceptedAnswer": { "@type": "Answer", "text": "GEO structures content so AI systems like Google AI Overviews, ChatGPT and Perplexity can cite it directly, while traditional SEO focuses on organic rankings. We run them together since both rely on the same technical and content foundation." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get started?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Send us your site for a free audit. You'll get a prioritized, honest read on where you're losing visibility and what we'd fix first - no obligation to continue." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Scoped additions for this page only — built from the site's existing
+       CSS variables so they follow the same dark/light theme automatically. */
+    .svc-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 2px; }
+    .svc-table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 13.5px; }
+    .svc-table th, .svc-table td { padding: 16px 20px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    .svc-table thead th { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 13px; letter-spacing: 0.02em; color: var(--foreground); background: var(--surface); }
+    .svc-table tbody tr:last-child td { border-bottom: none; }
+    .svc-table tbody tr:hover { background: color-mix(in oklab, var(--surface) 60%, transparent); }
+    .svc-table td:first-child, .svc-table th:first-child { color: var(--accent); font-weight: 600; white-space: nowrap; }
+    .svc-table td { color: var(--muted-text); line-height: 1.55; }
+
+    .svc-pill { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; font-size: 12px; color: var(--muted-text); }
+
+    .svc-tier { border: 1px solid var(--border); background: var(--surface); padding: 28px; border-radius: 2px; display: flex; flex-direction: column; height: 100%; }
+    .svc-tier h3 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 19px; color: var(--foreground); }
+    .svc-tier p { margin-top: 8px; font-size: 13px; color: var(--muted-text); line-height: 1.6; }
+    .svc-tier ul { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .svc-tier li { font-size: 13px; color: var(--muted-text); padding-left: 18px; position: relative; line-height: 1.5; }
+    .svc-tier li:before { content: ""; position: absolute; left: 0; top: 7px; width: 7px; height: 1px; background: var(--accent); }
+  </style>
+</head>
+
+<body>
+  <div class="min-h-screen bg-background">
+    <header id="site-header"
+      class="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-700 ease-expo border-b border-border/70 bg-[rgba(10,10,12,0.8)] backdrop-blur-xl">
+      <div class="shell">
+        <div
+          class="shell-inner grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4 md:grid-cols-[1fr_auto_1fr] md:py-5">
+          <div class="enter min-w-0" style="animation-delay:80ms"><a href="index.html#home"
+              class="flex items-center gap-2.5 shrink-0"><img src="logo.png" alt="Web Dominators" width="119"
+                height="26" style="height:26px;width:auto;flex-shrink:0;"></a></div>
+          <nav class="hidden items-center gap-9 justify-self-center md:flex"><a href="index.html#home"
+              class="enter link-underline text-sm text-muted-foreground" style="animation-delay:160ms">Home</a>
+            <div id="services-dropdown" class="enter relative" style="animation-delay:240ms"><button
+                class="link-underline flex items-center gap-1.5 text-sm text-foreground">Services<svg width="9"
+                  height="6" viewBox="0 0 9 6" fill="none" aria-hidden="true">
+                  <path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.2"></path>
+                </svg></button>
+              <div id="services-panel"
+                class="absolute left-1/2 top-full w-[560px] -translate-x-1/2 pt-6 transition-all duration-500 ease-expo pointer-events-none translate-y-2 opacity-0">
+                <div
+                  class="grid grid-cols-2 gap-x-6 gap-y-1 rounded-md border border-border bg-surface/95 p-5 backdrop-blur-xl">
+                  <a href="seo-services.html"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-accent">Search Engine Optimization (SEO)<span
+                        class="mt-1 block h-px w-full bg-accent"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Rank higher, get found first</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Generative &amp; Answer Engine
+                      (GEO/AEO)<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Be the answer AI cites</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Pay-Per-Click Advertising (PPC)<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Spend less, convert more</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Social Media Marketing<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Attention that converts</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Content Marketing &amp; Strategy<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Say something worth ranking</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Web Design &amp; Development<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Fast, sharp, built to sell</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Email Marketing<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Own the channel you rent least</span></a><a
+                    href="index.html#services"
+                    class="group rounded-sm px-3 py-2.5 transition-colors duration-500 ease-expo hover:bg-background/60"><span
+                      class="block text-[13px] font-medium text-foreground">Marketing Automation<span
+                        class="mt-1 block h-px w-0 bg-accent transition-[width] duration-500 ease-expo group-hover:w-full"></span></span><span
+                      class="mt-1 block text-[11.5px] text-muted-foreground">Let the system do the follow-up</span></a>
+                </div>
+              </div>
+            </div><a href="index.html#work" class="enter link-underline text-sm text-muted-foreground"
+              style="animation-delay:320ms">Work</a><a href="index.html#process"
+              class="enter link-underline text-sm text-muted-foreground" style="animation-delay:400ms">About</a><a
+              href="#contact" class="enter link-underline text-sm text-muted-foreground"
+              style="animation-delay:480ms">Contact</a>
+          </nav>
+          <div class="hidden justify-self-end md:block"><a href="#contact"
+              class="enter btn-gold inline-flex rounded-sm px-5 py-2.5 text-[13px]" style="animation-delay:560ms">Get a
+              Free Audit</a></div><button id="mobile-menu-btn" aria-label="Menu"
+            class="justify-self-end md:hidden"><span class="block h-px w-6 bg-foreground"></span><span
+              class="mt-1.5 block h-px w-6 bg-foreground"></span></button>
+        </div>
+      </div>
+      <div id="mobile-overlay"
+        class="fixed inset-0 z-50 bg-background transition-transform duration-700 ease-expo md:hidden -translate-y-full">
+        <div class="flex h-full flex-col px-6 py-5">
+          <div class="flex items-center justify-between"><a href="index.html#home"
+              class="flex items-center gap-2.5 shrink-0"><img src="logo.png" alt="Web Dominators" width="119"
+                height="26" style="height:26px;width:auto;flex-shrink:0;"></a><button id="mobile-close-btn"
+              aria-label="Close menu" class="p-2"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+                <path d="M1 1l16 16M17 1L1 17" stroke="var(--foreground)" stroke-width="1.2"></path>
+              </svg></button></div>
+          <div class="mt-14 flex flex-col items-center gap-7 overflow-y-auto text-center"><a href="index.html#home"
+              class="font-display text-2xl">Home</a>
+            <div class="w-full"><button id="mobile-acc-btn"
+                class="mx-auto flex items-center gap-2 font-display text-2xl">Services<span id="mobile-acc-icon"
+                  class="text-accent transition-transform duration-500 ease-expo ">+</span></button>
+              <div id="mobile-acc-panel" class="grid transition-[grid-template-rows,opacity] duration-500 ease-expo"
+                style="grid-template-rows:0fr;opacity:0">
+                <div class="overflow-hidden">
+                  <div class="flex flex-col gap-3 pt-5"><a href="seo-services.html"
+                      class="text-sm text-accent">Search Engine Optimization (SEO)</a><a href="index.html#services"
+                      class="text-sm text-muted-foreground">Generative &amp; Answer Engine Optimization</a><a
+                      href="index.html#services" class="text-sm text-muted-foreground">Pay-Per-Click Advertising
+                      (PPC)</a><a href="index.html#services" class="text-sm text-muted-foreground">Social Media
+                      Marketing</a><a href="index.html#services" class="text-sm text-muted-foreground">Content
+                      Marketing &amp; Strategy</a><a href="index.html#services" class="text-sm
+                      text-muted-foreground">Web Design &amp; Development</a><a href="index.html#services"
+                      class="text-sm text-muted-foreground">Email Marketing</a><a href="index.html#services"
+                      class="text-sm text-muted-foreground">Marketing Automation</a></div>
+                </div>
+              </div>
+            </div><a href="index.html#work" class="font-display text-2xl">Work</a><a href="index.html#process"
+              class="font-display text-2xl">About</a><a href="#contact" class="font-display text-2xl">Contact</a><a
+              href="#contact" class="btn-gold mt-4 rounded-sm px-6 py-3 text-sm">Get a Free Audit</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="relative overflow-hidden pb-20 pt-36 lg:pb-28 lg:pt-48">
+        <div class="shell">
+          <div class="shell-inner">
+            <p class="enter text-[11px] uppercase tracking-[0.32em] text-accent" style="animation-delay:80ms">
+              Search Engine Optimization</p>
+            <h1
+              class="enter mt-6 max-w-[20ch] font-display text-[38px] font-semibold leading-[1.08] tracking-[-0.02em] text-foreground sm:text-[52px] lg:text-[62px]"
+              style="animation-delay:180ms">Search Engine Optimization (SEO) Services</h1>
+            <p class="enter mt-7 max-w-[64ch] text-[15.5px] leading-relaxed text-muted-foreground"
+              style="animation-delay:300ms">Web Dominators' SEO services combine technical fixes, on-page and
+              off-page optimization, content strategy and AI search visibility into one system built to grow
+              organic revenue — not just rankings. Every engagement starts with a full audit, so the plan is built
+              on your site's actual gaps, not a template.</p>
+            <div class="enter mt-9 flex flex-wrap items-center gap-7" style="animation-delay:420ms"><a
+                href="#contact" class="btn-gold rounded-sm px-7 py-3.5 text-sm">Get a Free SEO Audit</a><a
+                href="#process" class="link-underline text-sm text-muted-foreground">See Our Process ↓</a></div>
+            <div class="enter mt-14 flex flex-wrap items-end gap-x-10 gap-y-6 border-t border-border pt-8"
+              style="animation-delay:540ms">
+              <div><span id="stat-0" class="font-display text-2xl font-semibold text-foreground" data-target="150"
+                  data-suffix="+" data-decimals="0">0+</span>
+                <p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Campaigns Launched</p>
+              </div>
+              <div><span id="stat-1" class="font-display text-2xl font-semibold text-foreground" data-target="3.2"
+                  data-suffix="x" data-decimals="1">0x</span>
+                <p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Avg. Organic Growth</p>
+              </div>
+              <div><span id="stat-2" class="font-display text-2xl font-semibold text-foreground" data-target="40"
+                  data-suffix="+" data-decimals="0">0+</span>
+                <p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Happy Clients</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHAT'S INCLUDED ============ -->
+      <section id="services" class="section-y relative">
+        <div class="shell">
+          <div class="shell-inner">
+            <div class="max-w-2xl">
+              <p class="text-[11px] uppercase tracking-[0.32em] text-accent">What's Included</p>
+              <h2 class="mt-5 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] sm:text-[44px]">
+                Six Disciplines, Run as One SEO System</h2>
+              <p class="mt-5 max-w-[56ch] text-[15px] leading-relaxed text-muted-foreground">SEO services aren't one
+                task — they're several disciplines that only work when they move together. Here's what's inside
+                every Web Dominators SEO engagement.</p>
+            </div>
+            <div id="services-reveal"
+              class="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+
+              <article class="rise group relative bg-surface p-7 transition-colors duration-700 ease-expo hover:bg-[#17171b]"
+                style="transition-delay:0ms"><span
+                  class="block h-px w-10 bg-accent transition-[width] duration-700 ease-expo group-hover:w-20"></span><svg
+                  viewBox="0 0 28 28"
+                  class="mt-7 h-7 w-7 text-muted-foreground transition-colors duration-700 ease-expo group-hover:text-accent"
+                  fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <g>
+                    <path d="M14 4v4M14 20v4M4 14h4M20 14h4M7 7l2.8 2.8M18.2 18.2L21 21M21 7l-2.8 2.8M9.8 18.2L7 21"></path>
+                    <circle cx="14" cy="14" r="4.5"></circle>
+                  </g>
+                </svg>
+                <h3 class="mt-6 font-display text-[19px] font-semibold leading-snug text-foreground">Technical SEO</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Site speed, crawlability,
+                  indexation, Core Web Vitals, structured data and mobile usability, fixed so search engines can
+                  actually read and trust your site.</p>
+              </article>
+
+              <article class="rise group relative bg-surface p-7 transition-colors duration-700 ease-expo hover:bg-[#17171b]"
+                style="transition-delay:60ms"><span
+                  class="block h-px w-10 bg-accent transition-[width] duration-700 ease-expo group-hover:w-20"></span><svg
+                  viewBox="0 0 28 28"
+                  class="mt-7 h-7 w-7 text-muted-foreground transition-colors duration-700 ease-expo group-hover:text-accent"
+                  fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <g>
+                    <path d="M7 4h11l5 5v15H7z"></path>
+                    <path d="M18 4v5h5"></path>
+                    <path d="M11 14h7M11 18h7M11 22h4"></path>
+                  </g>
+                </svg>
+                <h3 class="mt-6 font-display text-[19px] font-semibold leading-snug text-foreground">On-Page SEO</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Title tags, meta descriptions,
+                  header structure, internal linking and keyword mapping, aligned to what your buyers actually
+                  search for.</p>
+              </article>
+
+              <article class="rise group relative bg-surface p-7 transition-colors duration-700 ease-expo hover:bg-[#17171b]"
+                style="transition-delay:120ms"><span
+                  class="block h-px w-10 bg-accent transition-[width] duration-700 ease-expo group-hover:w-20"></span><svg
+                  viewBox="0 0 28 28"
+                  class="mt-7 h-7 w-7 text-muted-foreground transition-colors duration-700 ease-expo group-hover:text-accent"
+                  fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <g>
+                    <circle cx="8" cy="20" r="3.2"></circle>
+                    <circle cx="20" cy="8" r="3.2"></circle>
+                    <path d="M10.3 17.7L17.7 10.3"></path>
+                  </g>
+                </svg>
+                <h3 class="mt-6 font-display text-[19px] font-semibold leading-snug text-foreground">Off-Page SEO
+                  &amp; Link Building</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Digital PR, guest placements and
+                  citation building that earn authority signals instead of renting them from link farms.</p>
+              </article>
+
+              <article class="rise group relative bg-surface p-7 transition-colors duration-700 ease-expo hover:bg-[#17171b]"
+                style="transition-delay:180ms"><span
+                  class="block h-px w-10 bg-accent transition-[width] duration-700 ease-expo group-hover:w-20"></span><svg
+                  viewBox="0 0 28 28"
+                  class="mt-7 h-7 w-7 text-muted-foreground transition-colors duration-700 ease-expo group-hover:text-accent"
+                  fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <g>
+                    <path d="M5 6h13l5 5v11H5z"></path>
+                    <path d="M18 6v5h5"></path>
+                    <path d="M9 15h9M9 19h5"></path>
+                  </g>
+                </svg>
+                <h3 class="mt-6 font-display text-[19px] font-semibold leading-snug text-foreground">Content Strategy
+                  &amp; Creation</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Topical maps and a publishing
+                  cadence built around real search intent, so content ranks and reads like it was written by someone
+                  who knows the subject.</p>
+              </article>
+
+              <article class="rise group relative bg-surface p-7 transition-colors duration-700 ease-expo hover:bg-[#17171b]"
+                style="transition-delay:240ms"><span
+                  class="block h-px w-10 bg-accent transition-[width] duration-700 ease-expo group-hover:w-20"></span><svg
+                  viewBox="0 0 28 28"
+                  class="mt-7 h-7 w-7 text-muted-foreground transition-colors duration-700 ease-expo group-hover:text-accent"
+                  fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <g>
+                    <path d="M14 3v4M14 21v4M4.5 8l3.2 2M20.3 18l3.2 2M4.5 20l3.2-2M20.3 10l3.2-2"></path>
+                    <circle cx="14" cy="14" r="6"></circle>
+                  </g>
+                </svg>
+                <h3 class="mt-6 font-display text-[19px] font-semibold leading-snug text-foreground">Local SEO</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Google Business Profile
+                  optimization, citation consistency and location pages for businesses that need to win map-pack and
+                  "near me" search.</p>
+              </article>
+
+              <article class="rise group relative bg-surface p-7 transition-colors duration-700 ease-expo hover:bg-[#17171b]"
+                style="transition-delay:300ms"><span
+                  class="block h-px w-10 bg-accent transition-[width] duration-700 ease-expo group-hover:w-20"></span><svg
+                  viewBox="0 0 28 28"
+                  class="mt-7 h-7 w-7 text-muted-foreground transition-colors duration-700 ease-expo group-hover:text-accent"
+                  fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
+                  <g>
+                    <path d="M14 4l2.4 5.2L22 10l-4 4.2 1 6-5-2.8-5 2.8 1-6-4-4.2 5.6-.8z"></path>
+                  </g>
+                </svg>
+                <h3 class="mt-6 font-display text-[19px] font-semibold leading-snug text-foreground">AI Search
+                  Optimization (GEO/AEO)</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Structuring content as clear,
+                  self-contained answers so it's eligible to be cited inside Google AI Overviews, ChatGPT and
+                  Perplexity, alongside traditional rankings.</p>
+              </article>
+
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
+      </section>
+
+      <!-- ============ TYPES OF SEO SERVICES (TABLE) ============ -->
+      <section id="svc-types" class="section-y">
+        <div class="shell">
+          <div class="shell-inner">
+            <div class="max-w-2xl">
+              <p class="text-[11px] uppercase tracking-[0.32em] text-accent">Service Types</p>
+              <h2 class="mt-5 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] sm:text-[44px]">
+                Which Type of SEO Service Does Your Business Need?</h2>
+              <p class="mt-5 max-w-[60ch] text-[15px] leading-relaxed text-muted-foreground">SEO services generally
+                fall into five categories — local, national, e-commerce, technical and AI search optimization — and
+                most businesses need a blend of two or three, not all five. Here's what each one actually covers.</p>
+            </div>
+            <div class="mt-14 svc-table-wrap">
+              <table class="svc-table">
+                <thead>
+                  <tr>
+                    <th>Service Type</th>
+                    <th>Best For</th>
+                    <th>What's Included</th>
+                    <th>Typical Timeline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Local SEO</td>
+                    <td>Businesses with a physical location or service area</td>
+                    <td>Google Business Profile, citations, review strategy, location pages</td>
+                    <td>60–90 days for first movement</td>
+                  </tr>
+                  <tr>
+                    <td>National / Enterprise SEO</td>
+                    <td>Brands competing across the country or large sites (500+ pages)</td>
+                    <td>Site architecture, content at scale, technical audits, internal-linking systems</td>
+                    <td>4–9 months</td>
+                  </tr>
+                  <tr>
+                    <td>E-commerce SEO</td>
+                    <td>Online stores</td>
+                    <td>Product &amp; category page optimization, schema, faceted-navigation fixes, commercial-intent
+                      content</td>
+                    <td>3–6 months</td>
+                  </tr>
+                  <tr>
+                    <td>Technical SEO Audit</td>
+                    <td>Sites with a traffic drop, migration or unexplained ranking loss</td>
+                    <td>Full crawl, Core Web Vitals, indexation and structured-data diagnosis</td>
+                    <td>2–4 weeks for the audit itself</td>
+                  </tr>
+                  <tr>
+                    <td>AI Search Optimization (GEO)</td>
+                    <td>Any business that wants to be cited by AI Overviews, ChatGPT or Perplexity</td>
+                    <td>Answer-island content structuring, schema, entity &amp; E-E-A-T signals</td>
+                    <td>Runs alongside core SEO, not standalone</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROCESS ============ -->
+      <section id="process" class="section-y">
+        <div class="shell">
+          <div class="shell-inner">
+            <div class="max-w-2xl">
+              <p class="text-[11px] uppercase tracking-[0.32em] text-accent">Method</p>
+              <h2 class="mt-5 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] sm:text-[44px]">
+                How We Get You Ranking</h2>
+              <p class="mt-5 max-w-[58ch] text-[15px] leading-relaxed text-muted-foreground">Our SEO process runs in
+                six stages — audit, strategy, technical and on-page fixes, content, off-page authority, and ongoing
+                tracking — repeated in a monthly cycle once the foundation is in place.</p>
+            </div>
+            <div id="process-reveal" class="relative mt-20">
+              <div class="grid gap-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-16">
+
+                <div class="rise relative pl-8 lg:pl-0" style="transition-delay:0ms"><span
+                    class="absolute left-0 top-[7px] h-2.5 w-2.5 -translate-x-[3px] rounded-full bg-accent lg:relative lg:left-auto lg:top-auto lg:mb-8 lg:block lg:translate-x-0"></span>
+                  <div class="relative"><span
+                      class="pointer-events-none absolute -top-9 left-0 font-display text-[56px] font-semibold leading-none text-muted-foreground/15">01</span>
+                    <h3 class="relative font-display text-[20px] font-semibold text-foreground">Audit</h3>
+                  </div>
+                  <p class="mt-4 max-w-[34ch] text-[13.5px] leading-relaxed text-muted-foreground">Full technical
+                    crawl, keyword gap analysis, competitor benchmark and AI-search visibility check.</p>
+                </div>
+
+                <div class="rise relative pl-8 lg:pl-0" style="transition-delay:120ms"><span
+                    class="absolute left-0 top-[7px] h-2.5 w-2.5 -translate-x-[3px] rounded-full bg-accent lg:relative lg:left-auto lg:top-auto lg:mb-8 lg:block lg:translate-x-0"></span>
+                  <div class="relative"><span
+                      class="pointer-events-none absolute -top-9 left-0 font-display text-[56px] font-semibold leading-none text-muted-foreground/15">02</span>
+                    <h3 class="relative font-display text-[20px] font-semibold text-foreground">Strategy</h3>
+                  </div>
+                  <p class="mt-4 max-w-[34ch] text-[13.5px] leading-relaxed text-muted-foreground">A prioritized
+                    90-day plan built around your goals, not a generic checklist.</p>
+                </div>
+
+                <div class="rise relative pl-8 lg:pl-0" style="transition-delay:240ms"><span
+                    class="absolute left-0 top-[7px] h-2.5 w-2.5 -translate-x-[3px] rounded-full bg-accent lg:relative lg:left-auto lg:top-auto lg:mb-8 lg:block lg:translate-x-0"></span>
+                  <div class="relative"><span
+                      class="pointer-events-none absolute -top-9 left-0 font-display text-[56px] font-semibold leading-none text-muted-foreground/15">03</span>
+                    <h3 class="relative font-display text-[20px] font-semibold text-foreground">Technical &amp;
+                      On-Page Fixes</h3>
+                  </div>
+                  <p class="mt-4 max-w-[34ch] text-[13.5px] leading-relaxed text-muted-foreground">Speed,
+                    crawlability, structured data, title tags and internal linking corrected first — the foundation
+                    everything else depends on.</p>
+                </div>
+
+                <div class="rise relative pl-8 lg:pl-0" style="transition-delay:360ms"><span
+                    class="absolute left-0 top-[7px] h-2.5 w-2.5 -translate-x-[3px] rounded-full bg-accent lg:relative lg:left-auto lg:top-auto lg:mb-8 lg:block lg:translate-x-0"></span>
+                  <div class="relative"><span
+                      class="pointer-events-none absolute -top-9 left-0 font-display text-[56px] font-semibold leading-none text-muted-foreground/15">04</span>
+                    <h3 class="relative font-display text-[20px] font-semibold text-foreground">Content</h3>
+                  </div>
+                  <p class="mt-4 max-w-[34ch] text-[13.5px] leading-relaxed text-muted-foreground">Topical maps and
+                    new or refreshed pages built for the keywords and questions your buyers are actually searching.
+                  </p>
+                </div>
+
+                <div class="rise relative pl-8 lg:pl-0" style="transition-delay:480ms"><span
+                    class="absolute left-0 top-[7px] h-2.5 w-2.5 -translate-x-[3px] rounded-full bg-accent lg:relative lg:left-auto lg:top-auto lg:mb-8 lg:block lg:translate-x-0"></span>
+                  <div class="relative"><span
+                      class="pointer-events-none absolute -top-9 left-0 font-display text-[56px] font-semibold leading-none text-muted-foreground/15">05</span>
+                    <h3 class="relative font-display text-[20px] font-semibold text-foreground">Off-Page Authority
+                    </h3>
+                  </div>
+                  <p class="mt-4 max-w-[34ch] text-[13.5px] leading-relaxed text-muted-foreground">Digital PR and
+                    link building that earn genuine authority signals, not rented ones.</p>
+                </div>
+
+                <div class="rise relative pl-8 lg:pl-0" style="transition-delay:600ms"><span
+                    class="absolute left-0 top-[7px] h-2.5 w-2.5 -translate-x-[3px] rounded-full bg-accent lg:relative lg:left-auto lg:top-auto lg:mb-8 lg:block lg:translate-x-0"></span>
+                  <div class="relative"><span
+                      class="pointer-events-none absolute -top-9 left-0 font-display text-[56px] font-semibold leading-none text-muted-foreground/15">06</span>
+                    <h3 class="relative font-display text-[20px] font-semibold text-foreground">Track &amp; Refine
+                    </h3>
+                  </div>
+                  <p class="mt-4 max-w-[34ch] text-[13.5px] leading-relaxed text-muted-foreground">Monthly reporting
+                    tied to rankings, traffic and revenue, with the strategy adjusted based on what's actually
+                    moving the number.</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WHY US ============ -->
+      <section id="why-reveal" class="section-y relative bg-[#0d0d10]">
+        <div class="shell">
+          <div class="shell-inner">
+            <div class="max-w-2xl">
+              <p class="text-[11px] uppercase tracking-[0.32em] text-accent">Why Us</p>
+              <h2 class="mt-5 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] sm:text-[44px]">
+                SEO Services Built Around Revenue, Not Vanity Metrics</h2>
+            </div>
+            <div class="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2">
+              <div class="rise bg-background p-8" style="transition-delay:0ms">
+                <h3 class="font-display text-[18px] font-semibold text-foreground">One system, not scattered tactics
+                </h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Technical, on-page, off-page,
+                  content and AI search run together under one strategy instead of being sold as disconnected
+                  add-ons.</p>
+              </div>
+              <div class="rise bg-background p-8" style="transition-delay:100ms">
+                <h3 class="font-display text-[18px] font-semibold text-foreground">Full transparency</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">You see exactly what's being
+                  worked on, why, and what it's producing — no vague "SEO magic" behind a black box.</p>
+              </div>
+              <div class="rise bg-background p-8" style="transition-delay:200ms">
+                <h3 class="font-display text-[18px] font-semibold text-foreground">No guaranteed-rankings promises
+                </h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Nobody controls Google's
+                  algorithm. We'll tell you honestly what's achievable and in what timeframe instead of selling a
+                  guarantee no one can keep.</p>
+              </div>
+              <div class="rise bg-background p-8" style="transition-delay:300ms">
+                <h3 class="font-display text-[18px] font-semibold text-foreground">Senior eyes on your account</h3>
+                <p class="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">Strategy is built and reviewed by
+                  the people you actually talk to, not handed off to a junior team you've never met.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRICING ============ -->
+      <section id="pricing-reveal" class="section-y">
+        <div class="shell">
+          <div class="shell-inner">
+            <div class="max-w-2xl">
+              <p class="text-[11px] uppercase tracking-[0.32em] text-accent">Pricing</p>
+              <h2 class="mt-5 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] sm:text-[44px]">
+                How Much Do SEO Services Cost?</h2>
+              <p class="mt-5 max-w-[60ch] text-[15px] leading-relaxed text-muted-foreground">SEO service pricing
+                typically depends on your site's size, competition level and goals — most agencies price monthly
+                retainers, project-based audits, or hourly consulting. Rather than a fixed number, Web Dominators
+                builds a quote from your actual audit findings, so you're not paying for work your site doesn't
+                need.</p>
+            </div>
+
+            <div class="mt-14 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+              <div class="rise" style="transition-delay:0ms">
+                <h3 class="font-display text-[18px] font-semibold text-foreground">What affects the price</h3>
+                <ul class="mt-5 space-y-3">
+                  <li class="flex gap-3 text-[13.5px] leading-relaxed text-muted-foreground"><span
+                      class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Size and technical condition of your
+                    website</li>
+                  <li class="flex gap-3 text-[13.5px] leading-relaxed text-muted-foreground"><span
+                      class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"></span>How competitive your industry and
+                    target keywords are</li>
+                  <li class="flex gap-3 text-[13.5px] leading-relaxed text-muted-foreground"><span
+                      class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Whether content production is part
+                    of the engagement</li>
+                  <li class="flex gap-3 text-[13.5px] leading-relaxed text-muted-foreground"><span
+                      class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Local vs. national vs. global reach
+                  </li>
+                  <li class="flex gap-3 text-[13.5px] leading-relaxed text-muted-foreground"><span
+                      class="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"></span>One-time audit vs. ongoing monthly
+                    management</li>
+                </ul>
+                <a href="#contact" class="link-underline mt-8 inline-block text-sm text-accent">Get a scoped quote →</a>
+              </div>
+
+              <div class="grid gap-6 sm:grid-cols-3">
+                <div class="rise svc-tier" style="transition-delay:100ms">
+                  <span class="svc-pill">One-time</span>
+                  <h3 class="mt-4">SEO Audit</h3>
+                  <p>For businesses that want a diagnosis before committing to ongoing work.</p>
+                  <ul>
+                    <li>Full technical, on-page &amp; off-page audit</li>
+                    <li>Competitor benchmark</li>
+                    <li>Prioritized fix list</li>
+                  </ul>
+                </div>
+                <div class="rise svc-tier" style="border-color:var(--accent);transition-delay:180ms">
+                  <span class="svc-pill">Ongoing</span>
+                  <h3 class="mt-4">Growth Retainer</h3>
+                  <p>For businesses ready for ongoing monthly SEO management.</p>
+                  <ul>
+                    <li>Technical + on-page + content + off-page</li>
+                    <li>Run as one system</li>
+                    <li>Reported monthly</li>
+                  </ul>
+                </div>
+                <div class="rise svc-tier" style="transition-delay:260ms">
+                  <span class="svc-pill">Scoped</span>
+                  <h3 class="mt-4">Custom / Enterprise</h3>
+                  <p>For large, multi-location or e-commerce sites.</p>
+                  <ul>
+                    <li>Scoped to site size &amp; team structure</li>
+                    <li>Built around your goals</li>
+                    <li>Dedicated senior strategist</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="relative bg-[#0d0d10] pb-40 pt-24 lg:pb-48 lg:pt-32">
+        <div class="shell">
+          <div class="shell-inner">
+            <div class="mx-auto max-w-[800px]">
+              <p class="text-[11px] uppercase tracking-[0.32em] text-accent">FAQ</p>
+              <h2 class="mt-5 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] sm:text-[44px]">
+                SEO Services, Answered</h2>
+              <div id="faq-reveal" class="mt-14 border-t border-border">
+
+                <div class="faq-item rise border-b border-border" data-idx="0" style="transition-delay:0ms"><button
+                    data-idx="0"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">What
+                      are SEO services?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo rotate-[135deg]"
+                      data-idx="0">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="0" style="grid-template-rows:1fr;opacity:1">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">SEO
+                        services are the technical, on-page, off-page, content and AI-search work an agency does to
+                        improve a website's visibility in search results and generative AI answers — aimed at
+                        driving qualified organic traffic, not just higher rankings.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="1" style="transition-delay:60ms"><button
+                    data-idx="1"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">How
+                      much do SEO services cost?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="1">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="1" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">It depends
+                        on your site's size, competition and goals — pricing is usually a monthly retainer, a
+                        one-time audit, or a scoped project. We quote after an audit, not before one.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="2" style="transition-delay:120ms"><button
+                    data-idx="2"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">How
+                      long does SEO take to show results?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="2">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="2" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">Technical
+                        and on-page fixes can move rankings within 4–8 weeks. Meaningful, compounding organic
+                        traffic typically builds over 4–7 months, depending on competition.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="3" style="transition-delay:180ms"><button
+                    data-idx="3"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">What's
+                      the difference between SEO and PPC?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="3">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="3" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">SEO earns
+                        organic rankings over time and compounds; PPC buys immediate visibility that stops the
+                        moment you stop paying. Most businesses benefit from both, run together rather than as a
+                        choice between them.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="4" style="transition-delay:240ms"><button
+                    data-idx="4"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">Do
+                      you guarantee rankings?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="4">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="4" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">No — and
+                        any agency that does is either overpromising or cutting corners with tactics that risk a
+                        penalty. We commit to a transparent process and honest reporting instead.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="5" style="transition-delay:300ms"><button
+                    data-idx="5"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">What's
+                      included in an SEO audit?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="5">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="5" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">A
+                        technical crawl, keyword and AI-search visibility gap analysis, competitor benchmark and a
+                        prioritized plan — yours to keep whether or not you continue working with us.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="6" style="transition-delay:360ms"><button
+                    data-idx="6"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">Do
+                      you offer local SEO as well as national SEO?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="6">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="6" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">Yes. Local
+                        SEO (Google Business Profile, citations, location pages) and national/enterprise SEO are both
+                        part of our service range, often combined for businesses with both a storefront and a
+                        national online presence.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="7" style="transition-delay:420ms"><button
+                    data-idx="7"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">How
+                      is AI search optimization (GEO) different from regular SEO?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="7">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="7" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">GEO
+                        structures content so AI systems like Google AI Overviews, ChatGPT and Perplexity can cite it
+                        directly, while traditional SEO focuses on organic rankings. We run them together since both
+                        rely on the same technical and content foundation.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item rise border-b border-border" data-idx="8" style="transition-delay:480ms"><button
+                    data-idx="8"
+                    class="faq-btn group flex w-full items-start justify-between gap-6 py-6 text-left"><span
+                      class="font-display text-[18px] font-medium leading-snug text-foreground transition-colors duration-500 ease-expo group-hover:text-accent sm:text-[20px]">How
+                      do I get started?</span><span
+                      class="faq-icon mt-1 shrink-0 text-lg text-accent transition-transform duration-500 ease-expo"
+                      data-idx="8">+</span></button>
+                  <div class="faq-panel grid transition-[grid-template-rows,opacity] duration-[350ms] ease-expo"
+                    data-idx="8" style="grid-template-rows:0fr;opacity:0">
+                    <div class="overflow-hidden">
+                      <p class="max-w-[62ch] pb-7 pr-10 text-[14px] leading-relaxed text-muted-foreground">Send us
+                        your site for a free audit. You'll get a prioritized, honest read on where you're losing
+                        visibility and what we'd fix first — no obligation to continue.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><span aria-hidden="true"
+          class="pointer-events-none absolute bottom-0 left-1/2 h-28 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-accent/50 to-accent/80"></span>
+      </section>
+
+      <!-- ============ FINAL CTA ============ -->
+      <section id="contact" class="section-y transition-colors duration-1000 ease-expo"
+        style="background-color: var(--background);">
+        <div class="shell">
+          <div id="finalcta-inner" class="shell-inner rise text-center">
+            <h2
+              class="mx-auto max-w-[16ch] font-display text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[52px]">
+              Ready to Rank Where It Counts?</h2>
+            <p class="mx-auto mt-6 max-w-[48ch] text-[15px] leading-relaxed text-muted-foreground">Send us your site.
+              We'll come back with an honest read on where your SEO is leaking — and what we'd fix first.</p>
+            <div class="mt-10"><a href="mailto:hello@webdominators.com"
+                class="btn-gold glow-pulse inline-flex rounded-sm px-8 py-4 text-sm">Get Your Free SEO Audit</a></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-surface pb-10 pt-4">
+      <div class="shell">
+        <div class="shell-inner">
+          <div class="grid gap-12 border-t border-border pt-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]">
+            <div>
+              <div class="flex items-center gap-2.5"><img src="logo.png" alt="Web Dominators" width="101" height="22"
+                  style="height:22px;width:auto;flex-shrink:0;"></div>
+              <p class="mt-4 max-w-[34ch] text-[13px] leading-relaxed text-muted-foreground">A boutique growth agency
+                for businesses that intend to lead their category.</p>
+              <p class="mt-6 text-[12px] text-muted-foreground">Designed &amp; built by Web Dominators — Rohit Mehmi</p>
+            </div>
+            <div>
+              <h3 class="text-[11px] uppercase tracking-[0.24em] text-accent">Navigate</h3>
+              <ul class="mt-5 space-y-3">
+                <li><a href="index.html#home" class="link-underline text-[13px] text-muted-foreground">Home</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Services</a></li>
+                <li><a href="index.html#work" class="link-underline text-[13px] text-muted-foreground">Work</a></li>
+                <li><a href="index.html#process" class="link-underline text-[13px] text-muted-foreground">About</a></li>
+                <li><a href="#contact" class="link-underline text-[13px] text-muted-foreground">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-[11px] uppercase tracking-[0.24em] text-accent">Services</h3>
+              <ul class="mt-5 space-y-3">
+                <li><a href="seo-services.html" class="link-underline text-[13px] text-accent">Search Engine
+                    Optimization (SEO)</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Generative &amp; Answer
+                    Engine Optimization</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Pay-Per-Click
+                    Advertising (PPC)</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Social Media
+                    Marketing</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Content Marketing &amp;
+                    Strategy</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Web Design &amp;
+                    Development</a></li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Email Marketing</a>
+                </li>
+                <li><a href="index.html#services" class="link-underline text-[13px] text-muted-foreground">Marketing
+                    Automation</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-[11px] uppercase tracking-[0.24em] text-accent">Contact</h3>
+              <ul class="mt-5 space-y-3 text-[13px] text-muted-foreground">
+                <li><a href="mailto:hello@webdominators.com" class="link-underline">hello@webdominators.com</a></li>
+                <li><a href="tel:+18005550132" class="link-underline">+1 (800) 555-0132</a></li>
+              </ul>
+              <div class="mt-7 flex gap-5"><a href="#contact" aria-label="LinkedIn"
+                  class="text-muted-foreground transition-colors duration-500 ease-expo hover:text-accent"><svg
+                    width="20" height="20" viewBox="0 0 20 22" fill="none" stroke="currentColor" stroke-width="1.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 8v10M4 4.5v.01M10 18v-5.5a2.5 2.5 0 015 0V18M10 18v-8"></path>
+                  </svg></a><a href="#contact" aria-label="X"
+                  class="text-muted-foreground transition-colors duration-500 ease-expo hover:text-accent"><svg
+                    width="20" height="20" viewBox="0 0 20 22" fill="none" stroke="currentColor" stroke-width="1.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4l12 14M16 4L4 18"></path>
+                  </svg></a><a href="#contact" aria-label="Instagram"
+                  class="text-muted-foreground transition-colors duration-500 ease-expo hover:text-accent"><svg
+                    width="20" height="20" viewBox="0 0 20 22" fill="none" stroke="currentColor" stroke-width="1.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M4 7a3 3 0 013-3h6a3 3 0 013 3v6a3 3 0 01-3 3H7a3 3 0 01-3-3zM10 7.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5M14 6.4v.01">
+                    </path>
+                  </svg></a></div>
+            </div>
+          </div>
+          <div class="mt-14 border-t border-border pt-7">
+            <p class="text-[12px] text-muted-foreground">© 2026 Web Dominators. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div><button id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark mode" type="button"><svg
+      class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4.2"></circle>
+      <path
+        d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7">
+      </path>
+    </svg><svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"></path>
+    </svg></button>
+  <script src="script.js"></script>
+  <script>
+    // Extra scroll-reveal wiring for sections on this page that don't already
+    // have a matching container id inside the shared script.js.
+    (function () {
+      function revealChildrenOnce(container) {
+        if (!container) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              container.querySelectorAll(".rise").forEach(function (el) { el.classList.add("rise-in"); });
+              io.disconnect();
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+        io.observe(container);
+      }
+      ["why-reveal", "pricing-reveal"].forEach(function (id) {
+        revealChildrenOnce(document.getElementById(id));
+      });
+    })();
+  </script>
+</body>
+
+</html>
