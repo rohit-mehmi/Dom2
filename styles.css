@@ -4694,3 +4694,30 @@
     height: 19px;
   }
 }
+
+.wis-grid {
+  display: grid;
+  gap: 44px;
+  align-items: center;
+}
+
+@media (min-width:1024px) {
+  .wis-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 56px;
+  }
+}
+
+.wis-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 64px -24px rgba(0,0,0,.35);
+}
+
+.wis-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
