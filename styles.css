@@ -4708,16 +4708,33 @@
   }
 }
 
-.wis-card {
-  border-radius: 20px;
-  overflow: hidden;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  box-shadow: 0 24px 64px -24px rgba(0,0,0,.35);
+.wis-figure {
+  display: flex;
+  justify-content: center;
 }
 
-.wis-card img {
+.wis-figure img {
   display: block;
   width: 100%;
+  max-width: 460px;
   height: auto;
+}
+
+.wis-float {
+  animation: wisFloat 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes wisFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wis-float {
+    animation: none;
+  }
 }
