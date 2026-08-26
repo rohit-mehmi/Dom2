@@ -316,7 +316,8 @@
         root.removeAttribute("data-theme");
       }
       logos.forEach(function (img) {
-        img.src = theme === "light" ? "logo-light.png" : "logo.png";
+        var dir = img.getAttribute("src").replace(/[^\/]*$/, "");
+        img.src = dir + (theme === "light" ? "logo-light.png" : "logo.png");
       });
     }
 
