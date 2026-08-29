@@ -30,11 +30,17 @@ const OFFLINE_CACHE = `site-offline-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `site-runtime-${CACHE_VERSION}`;
 
 // Everything the offline experience needs, and nothing else.
-const OFFLINE_URL = "/offline.html";
+// Resolve everything relative to the folder this service worker actually
+// lives in (self.location), not a hardcoded "/" root. This is what makes
+// the exact same file work whether the site is hosted at a domain root
+// or under a GitHub Pages project subpath like /Dom2/ — a hardcoded
+// "/offline.html" only resolves correctly in the first case.
+const SW_DIR = self.location.href.replace(/[^/]*$/, "");
+const OFFLINE_URL = new URL("offline.html", SW_DIR).pathname;
 const OFFLINE_ASSETS = [
   OFFLINE_URL,
-  "/offline.css",
-  "/offline-game.js",
+  new URL("offline.css", SW_DIR).pathname,
+  new URL("offline-game.js", SW_DIR).pathname,
 ];
 
 // How many recently-visited real pages to opportunistically keep around
