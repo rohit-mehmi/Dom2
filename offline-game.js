@@ -1,12 +1,21 @@
 /* ==========================================================================
-   offline-game.js — "Signal Runner"
-   A small original endless-runner: a signal dot leaps over drifting
-   obstacles while the connection is down. Everything is drawn with canvas
-   primitives (no image files, no fonts beyond the system stack), so there
-   is nothing extra for the service worker to fetch or cache.
+   offline-game.js — "Pixel Breaker"
+   A tiny original Breakout/Arkanoid-style game: the words "Oops, you are
+   offline" are rendered once, then sampled pixel-by-pixel into a grid of
+   breakable bricks. A paddle at the bottom keeps a ball alive; every hit
+   knocks out one pixel of the text. Drop the ball past the paddle and it's
+   game over. Clear every pixel and you win.
 
-   Controls: Space / ArrowUp / tap-and-hold-free tap = jump. Works with a
-   keyboard on desktop and touch on mobile; no keyboard required on mobile.
+   Everything is drawn with canvas primitives (no image files, no font
+   files beyond the system stack), so there is nothing extra for the
+   service worker to fetch or cache.
+
+   Controls:
+   - Desktop: ArrowLeft/ArrowRight or A/D to move the paddle.
+              Space / click to launch the ball (and to restart after a
+              game over or a win).
+   - Touch:   Drag anywhere on the canvas to move the paddle.
+              Tap to launch (and to restart).
    ========================================================================== */
 (function () {
   "use strict";
@@ -39,141 +48,254 @@
     return v || fallback;
   }
   var COLOR_BG = cssVar("--offline-bg", "#0e0e12");
-  var COLOR_GROUND = cssVar("--offline-ground", "#2a2a33");
-  var COLOR_PLAYER = cssVar("--offline-accent", "#e8b94a");
-  var COLOR_OBSTACLE = cssVar("--offline-fg", "#9a9aa5");
+  var COLOR_BRICK = cssVar("--offline-fg", "#e8e8ec");
+  var COLOR_BRICK_DIM = cssVar("--offline-fg-muted", "#9a9aa5");
+  var COLOR_PADDLE = cssVar("--offline-accent", "#e8b94a");
+  var COLOR_BALL = cssVar("--offline-accent", "#e8b94a");
   var COLOR_TEXT = cssVar("--offline-fg", "#e8e8ec");
 
+  // ---------------------------------------------------------------------
+  // Build the brick grid by rendering the message onto an offscreen
+  // canvas, then sampling it in small blocks. Every block that lands on
+  // an inked pixel becomes a live brick.
+  // ---------------------------------------------------------------------
+  var MESSAGE = "Oops, you are offline";
+  var BLOCK = 5;
+  var TEXT_AREA_H = 64;
+  var TEXT_AREA_Y = 14;
+
+  function buildBricks() {
+    var off = document.createElement("canvas");
+    off.width = LOGICAL_W;
+    off.height = TEXT_AREA_H;
+    var octx = off.getContext("2d");
+    octx.clearRect(0, 0, off.width, off.height);
+    octx.fillStyle = "#fff";
+    octx.textBaseline = "top";
+
+    var fontSize = 42;
+    octx.font = "700 " + fontSize + "px 'Courier New', monospace";
+    var textWidth = octx.measureText(MESSAGE).width;
+    // Shrink to fit if the message would run past the canvas edges.
+    while (textWidth > LOGICAL_W - 40 && fontSize > 16) {
+      fontSize -= 2;
+      octx.font = "700 " + fontSize + "px 'Courier New', monospace";
+      textWidth = octx.measureText(MESSAGE).width;
+    }
+    var startX = (LOGICAL_W - textWidth) / 2;
+    octx.fillText(MESSAGE, startX, 6);
+
+    var img = octx.getImageData(0, 0, off.width, off.height).data;
+    var cols = Math.floor(off.width / BLOCK);
+    var rows = Math.floor(off.height / BLOCK);
+    var bricks = [];
+
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var px = c * BLOCK + Math.floor(BLOCK / 2);
+        var py = r * BLOCK + Math.floor(BLOCK / 2);
+        var idx = (py * off.width + px) * 4;
+        var alpha = img[idx + 3];
+        if (alpha > 128) {
+          bricks.push({
+            x: c * BLOCK,
+            y: TEXT_AREA_Y + r * BLOCK,
+            w: BLOCK - 1,
+            h: BLOCK - 1,
+            alive: true,
+          });
+        }
+      }
+    }
+    return bricks;
+  }
+
   // ---- Game constants ----
-  var GROUND_Y = 230;
-  var GRAVITY = 0.62;
-  var JUMP_VELOCITY = -11.5;
-  var PLAYER_X = 90;
-  var PLAYER_SIZE = 22;
-  var BASE_SPEED = 4.6;
-  var SPEED_RAMP = 0.0009; // speed gained per ms survived
+  var PADDLE_W = 90;
+  var PADDLE_H = 8;
+  var PADDLE_Y = LOGICAL_H - 18;
+  var PADDLE_SPEED = 0.62; // px per ms
+  var BALL_RADIUS = 5;
+  var BASE_BALL_SPEED = 0.30; // px per ms
 
   // ---- State ----
-  var state = "ready"; // "ready" | "playing" | "over"
-  var player, obstacles, score, best, speed, elapsed, lastTime, spawnTimer;
+  var state = "ready"; // "ready" | "playing" | "over" | "won"
+  var bricks, totalBricks, brokenCount, best, paddle, ball, lastTime;
+  var keys = { left: false, right: false };
+  var pointerActive = false;
 
   function loadBest() {
     try {
-      return parseInt(localStorage.getItem("signal-runner-best") || "0", 10);
+      return parseInt(localStorage.getItem("pixel-breaker-best") || "0", 10);
     } catch (e) {
       return 0;
     }
   }
   function saveBest(value) {
     try {
-      localStorage.setItem("signal-runner-best", String(value));
+      localStorage.setItem("pixel-breaker-best", String(value));
     } catch (e) {}
   }
 
+  function resetBallOnPaddle() {
+    ball = {
+      x: paddle.x + paddle.w / 2,
+      y: PADDLE_Y - BALL_RADIUS - 1,
+      vx: 0,
+      vy: 0,
+    };
+  }
+
   function reset() {
-    player = { y: GROUND_Y - PLAYER_SIZE, vy: 0, onGround: true };
-    obstacles = [];
-    score = 0;
-    speed = BASE_SPEED;
-    elapsed = 0;
-    spawnTimer = 0;
+    bricks = buildBricks();
+    totalBricks = bricks.length;
+    brokenCount = 0;
+    paddle = { x: (LOGICAL_W - PADDLE_W) / 2, w: PADDLE_W };
+    resetBallOnPaddle();
     lastTime = null;
   }
 
   best = loadBest();
   reset();
 
-  // ---- Input ----
-  function jump() {
+  function launch() {
+    var angle = -Math.PI / 2 + (Math.random() * 0.5 - 0.25); // mostly upward
+    ball.vx = Math.cos(angle) * BASE_BALL_SPEED * 16.6;
+    ball.vy = Math.sin(angle) * BASE_BALL_SPEED * 16.6;
+  }
+
+  function startOrRestart() {
     if (state === "ready") {
       state = "playing";
-      lastTime = null;
+      launch();
       requestAnimationFrame(loop);
-    }
-    if (state === "over") {
+    } else if (state === "over" || state === "won") {
       reset();
       state = "playing";
-      lastTime = null;
+      launch();
       requestAnimationFrame(loop);
-      return;
-    }
-    if (state === "playing" && player.onGround) {
-      player.vy = JUMP_VELOCITY;
-      player.onGround = false;
     }
   }
 
+  // ---- Input: keyboard ----
   window.addEventListener("keydown", function (e) {
+    if (e.code === "ArrowLeft" || e.code === "KeyA") keys.left = true;
+    if (e.code === "ArrowRight" || e.code === "KeyD") keys.right = true;
     if (e.code === "Space" || e.code === "ArrowUp") {
       e.preventDefault();
-      jump();
+      startOrRestart();
     }
   });
-  canvas.addEventListener("pointerdown", function (e) {
-    e.preventDefault();
-    jump();
+  window.addEventListener("keyup", function (e) {
+    if (e.code === "ArrowLeft" || e.code === "KeyA") keys.left = false;
+    if (e.code === "ArrowRight" || e.code === "KeyD") keys.right = false;
   });
 
-  // ---- Obstacles ----
-  function spawnObstacle() {
-    var h = 22 + Math.random() * 26;
-    var w = 16 + Math.random() * 14;
-    obstacles.push({ x: LOGICAL_W + w, y: GROUND_Y - h, w: w, h: h });
+  // ---- Input: pointer (mouse + touch) ----
+  function pointerToLogicalX(clientX) {
+    var rect = canvas.getBoundingClientRect();
+    var ratio = LOGICAL_W / rect.width;
+    return (clientX - rect.left) * ratio;
   }
 
-  function rectsOverlap(a, b) {
-    return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+  canvas.addEventListener("pointerdown", function (e) {
+    pointerActive = true;
+    paddle.x = clampPaddleX(pointerToLogicalX(e.clientX) - paddle.w / 2);
+    startOrRestart();
+  });
+  window.addEventListener("pointermove", function (e) {
+    if (!pointerActive) return;
+    paddle.x = clampPaddleX(pointerToLogicalX(e.clientX) - paddle.w / 2);
+  });
+  window.addEventListener("pointerup", function () {
+    pointerActive = false;
+  });
+
+  function clampPaddleX(x) {
+    return Math.max(0, Math.min(LOGICAL_W - paddle.w, x));
   }
 
   // ---- Main loop ----
   function loop(now) {
     if (state !== "playing") return;
     if (lastTime === null) lastTime = now;
-    var dt = Math.min(now - lastTime, 48); // clamp to avoid huge jumps on tab-resume
+    var dt = Math.min(now - lastTime, 32); // clamp to avoid huge jumps on tab-resume
     lastTime = now;
-    elapsed += dt;
-    speed = BASE_SPEED + elapsed * SPEED_RAMP;
-    score = Math.floor(elapsed / 100);
 
-    // physics
-    player.vy += GRAVITY;
-    player.y += player.vy;
-    if (player.y >= GROUND_Y - PLAYER_SIZE) {
-      player.y = GROUND_Y - PLAYER_SIZE;
-      player.vy = 0;
-      player.onGround = true;
+    // Paddle movement via keyboard (pointer drag sets position directly).
+    if (keys.left) paddle.x -= PADDLE_SPEED * dt;
+    if (keys.right) paddle.x += PADDLE_SPEED * dt;
+    paddle.x = clampPaddleX(paddle.x);
+
+    // Ball movement.
+    ball.x += ball.vx * (dt / 16.6);
+    ball.y += ball.vy * (dt / 16.6);
+
+    // Walls.
+    if (ball.x - BALL_RADIUS <= 0) {
+      ball.x = BALL_RADIUS;
+      ball.vx = Math.abs(ball.vx);
+    } else if (ball.x + BALL_RADIUS >= LOGICAL_W) {
+      ball.x = LOGICAL_W - BALL_RADIUS;
+      ball.vx = -Math.abs(ball.vx);
+    }
+    if (ball.y - BALL_RADIUS <= 0) {
+      ball.y = BALL_RADIUS;
+      ball.vy = Math.abs(ball.vy);
     }
 
-    // spawn
-    spawnTimer -= dt;
-    if (spawnTimer <= 0) {
-      spawnObstacle();
-      spawnTimer = 900 + Math.random() * 900 - Math.min(elapsed / 60, 500);
-      if (spawnTimer < 420) spawnTimer = 420;
+    // Paddle collision (only when the ball is moving down into it).
+    if (
+      ball.vy > 0 &&
+      ball.y + BALL_RADIUS >= PADDLE_Y &&
+      ball.y + BALL_RADIUS <= PADDLE_Y + PADDLE_H + 6 &&
+      ball.x >= paddle.x - BALL_RADIUS &&
+      ball.x <= paddle.x + paddle.w + BALL_RADIUS
+    ) {
+      var hitPos = (ball.x - paddle.x) / paddle.w; // 0 (left edge) .. 1 (right edge)
+      var speed = Math.hypot(ball.vx, ball.vy);
+      var angle = -Math.PI / 2 + (hitPos - 0.5) * (Math.PI * 0.6);
+      ball.vx = Math.cos(angle) * speed;
+      ball.vy = Math.sin(angle) * speed;
+      ball.y = PADDLE_Y - BALL_RADIUS - 1;
     }
 
-    // move + collide + cull
-    var playerBox = { x: PLAYER_X, y: player.y, w: PLAYER_SIZE, h: PLAYER_SIZE };
-    for (var i = obstacles.length - 1; i >= 0; i--) {
-      obstacles[i].x -= speed * (dt / 16.6);
-      if (rectsOverlap(playerBox, obstacles[i])) {
-        gameOver();
-        return;
+    // Brick collision — break the single pixel the ball actually touches.
+    for (var i = 0; i < bricks.length; i++) {
+      var b = bricks[i];
+      if (!b.alive) continue;
+      if (
+        ball.x + BALL_RADIUS > b.x &&
+        ball.x - BALL_RADIUS < b.x + b.w &&
+        ball.y + BALL_RADIUS > b.y &&
+        ball.y - BALL_RADIUS < b.y + b.h
+      ) {
+        b.alive = false;
+        brokenCount++;
+        ball.vy = -ball.vy;
+        if (brokenCount >= totalBricks) {
+          state = "won";
+          if (brokenCount > best) {
+            best = brokenCount;
+            saveBest(best);
+          }
+        }
+        break; // one brick per frame keeps things predictable
       }
-      if (obstacles[i].x + obstacles[i].w < 0) obstacles.splice(i, 1);
+    }
+
+    // Ball dropped past the paddle — game over.
+    if (ball.y - BALL_RADIUS > LOGICAL_H) {
+      state = "over";
+      if (brokenCount > best) {
+        best = brokenCount;
+        saveBest(best);
+      }
     }
 
     draw();
-    requestAnimationFrame(loop);
-  }
-
-  function gameOver() {
-    state = "over";
-    if (score > best) {
-      best = score;
-      saveBest(best);
-    }
-    draw();
+    if (state === "playing") requestAnimationFrame(loop);
+    else draw();
   }
 
   // ---- Rendering ----
@@ -182,66 +304,66 @@
     ctx.fillStyle = COLOR_BG;
     ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
 
-    // ground
-    ctx.strokeStyle = COLOR_GROUND;
-    ctx.lineWidth = 2;
+    // Bricks (the message, one pixel-block at a time).
+    for (var i = 0; i < bricks.length; i++) {
+      var b = bricks[i];
+      if (!b.alive) continue;
+      ctx.fillStyle = COLOR_BRICK;
+      ctx.fillRect(b.x, b.y, b.w, b.h);
+    }
+
+    // Ground line (crossing this below the paddle ends the game).
+    ctx.strokeStyle = COLOR_BRICK_DIM;
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(0, GROUND_Y);
-    ctx.lineTo(LOGICAL_W, GROUND_Y);
+    ctx.moveTo(0, LOGICAL_H - 1);
+    ctx.lineTo(LOGICAL_W, LOGICAL_H - 1);
     ctx.stroke();
 
-    // player (a simple rounded square "signal" glyph)
-    ctx.fillStyle = COLOR_PLAYER;
-    roundRect(PLAYER_X, player.y, PLAYER_SIZE, PLAYER_SIZE, 5);
+    // Paddle.
+    ctx.fillStyle = COLOR_PADDLE;
+    ctx.fillRect(paddle.x, PADDLE_Y, paddle.w, PADDLE_H);
+
+    // Ball.
+    ctx.beginPath();
+    ctx.fillStyle = COLOR_BALL;
+    ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, Math.PI * 2);
     ctx.fill();
 
-    // obstacles
-    ctx.fillStyle = COLOR_OBSTACLE;
-    for (var i = 0; i < obstacles.length; i++) {
-      var o = obstacles[i];
-      roundRect(o.x, o.y, o.w, o.h, 3);
-      ctx.fill();
-    }
-
-    // score
+    // HUD.
     ctx.fillStyle = COLOR_TEXT;
-    ctx.font = "600 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+    ctx.font = "600 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
     ctx.textAlign = "right";
-    ctx.fillText("Score " + score, LOGICAL_W - 16, 30);
-    ctx.fillText("Best " + best, LOGICAL_W - 16, 52);
+    ctx.fillText("Pixels broken " + brokenCount + "/" + totalBricks, LOGICAL_W - 10, LOGICAL_H - 6);
+    ctx.textAlign = "left";
+    ctx.fillText("Best " + best, 10, LOGICAL_H - 6);
 
     if (state === "ready") {
-      centerText("Tap or press Space to start", LOGICAL_H / 2);
+      centerText("Tap, click, or press Space to launch", TEXT_AREA_Y + TEXT_AREA_H + 26);
     }
-    if (state === "over") {
-      ctx.fillStyle = "rgba(0,0,0,0.35)";
+    if (state === "over" || state === "won") {
+      ctx.fillStyle = "rgba(0,0,0,0.4)";
       ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
       ctx.fillStyle = COLOR_TEXT;
       ctx.font = "700 26px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("Game Over", LOGICAL_W / 2, LOGICAL_H / 2 - 16);
+      ctx.fillText(state === "won" ? "Signal Restored!" : "Ball Dropped", LOGICAL_W / 2, LOGICAL_H / 2 - 16);
       ctx.font = "400 15px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-      ctx.fillText("Score " + score + "  ·  Tap or press Space to try again", LOGICAL_W / 2, LOGICAL_H / 2 + 16);
-      ctx.textAlign = "right";
+      ctx.fillText(
+        brokenCount + "/" + totalBricks + " pixels broken · Tap or press Space to try again",
+        LOGICAL_W / 2,
+        LOGICAL_H / 2 + 16
+      );
+      ctx.textAlign = "left";
     }
-  }
-
-  function roundRect(x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
   }
 
   function centerText(text, y) {
     ctx.fillStyle = COLOR_TEXT;
-    ctx.font = "500 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+    ctx.font = "500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(text, LOGICAL_W / 2, y);
-    ctx.textAlign = "right";
+    ctx.textAlign = "left";
   }
 
   draw();
