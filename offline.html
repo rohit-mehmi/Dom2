@@ -13,28 +13,20 @@
 </head>
 <body>
 
-  <div class="offline-wrap">
+  <div class="offline-stage">
 
-    <span class="offline-badge"><span class="offline-badge__dot" aria-hidden="true"></span>No connection</span>
+    <h1 class="offline-heading">You are offline</h1>
 
-    <h1 class="offline-title">You're offline right now</h1>
-    <p class="offline-subtitle">
-      The page you were looking for couldn't load because your device has no internet
-      connection. Nothing on your end is broken — as soon as you're back online, everything
-      will work normally again.
-    </p>
+    <div class="offline-canvas-wrap">
+      <canvas id="signal-runner" aria-label="Pixel Breaker: an offline mini-game. Use arrow keys or drag to move the paddle and keep the ball alive, breaking the offline message one pixel at a time."></canvas>
 
-    <div class="offline-actions">
-      <button type="button" class="offline-btn offline-btn--primary" onclick="location.reload()">Try again</button>
-      <a class="offline-btn" href=".">Go to homepage</a>
+      <div id="game-over-screen" class="game-over-overlay" hidden>
+        <p id="game-over-title" class="game-over-title">You lost!</p>
+        <button type="button" id="overlay-restart-btn" class="offline-btn offline-btn--primary">Start again</button>
+      </div>
     </div>
 
-    <div class="offline-game-card">
-      <p class="offline-game-hint">While you wait — break the text below. Arrow keys or drag to move the bar, tap/click/Space to launch.</p>
-      <canvas id="signal-runner" width="800" height="300" aria-label="Pixel Breaker: an offline mini-game. Use arrow keys or drag to move the paddle and keep the ball alive, breaking one pixel of the offline message per hit."></canvas>
-    </div>
-
-    <p class="offline-footnote">This page is stored on your device, so it works with zero connection.</p>
+    <button type="button" id="floor-try-again-btn" class="offline-floor-btn">Try again</button>
 
   </div>
 
