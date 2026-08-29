@@ -33,8 +33,8 @@ const RUNTIME_CACHE = `site-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = "/offline.html";
 const OFFLINE_ASSETS = [
   OFFLINE_URL,
-  "/assets/offline/offline.css",
-  "/assets/offline/offline-game.js",
+  "/offline.css",
+  "/offline-game.js",
 ];
 
 // How many recently-visited real pages to opportunistically keep around
