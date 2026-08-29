@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're Offline</title>
+
+<!-- This page should never appear in search results — it's a fallback,
+     not real content, and it has no canonical URL of its own. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" href="/assets/offline/offline.css">
+</head>
+<body>
+
+  <div class="offline-wrap">
+
+    <span class="offline-badge"><span class="offline-badge__dot" aria-hidden="true"></span>No connection</span>
+
+    <h1 class="offline-title">You're offline right now</h1>
+    <p class="offline-subtitle">
+      The page you were looking for couldn't load because your device has no internet
+      connection. Nothing on your end is broken — as soon as you're back online, everything
+      will work normally again.
+    </p>
+
+    <div class="offline-actions">
+      <button type="button" class="offline-btn offline-btn--primary" onclick="location.reload()">Try again</button>
+      <a class="offline-btn" href="/">Go to homepage</a>
+    </div>
+
+    <div class="offline-game-card">
+      <p class="offline-game-hint">While you wait — a small game. Space / tap to jump.</p>
+      <canvas id="signal-runner" width="800" height="300" aria-label="Signal Runner: an offline mini-game. Press space or tap the canvas to jump over obstacles."></canvas>
+    </div>
+
+    <p class="offline-footnote">This page is stored on your device, so it works with zero connection.</p>
+
+  </div>
+
+<script src="/assets/offline/offline-game.js" defer></script>
+</body>
+</html>
